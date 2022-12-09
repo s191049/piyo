@@ -1,2 +1,4 @@
-<h1>StaticPages#contact</h1>
-<p>Find me in app/views/static_pages/contact.html.erb</p>
+<% provide(:title, "Contact") %>
+<p>
+  メールはこちらへ：<%= mail_to 'shota.minakuchi@g.wakayama-u.jp' %>
+</p>
