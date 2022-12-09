@@ -1,0 +1,40 @@
+ja:
+  activerecord:
+    models:
+      car: '車'
+    attributes:
+      car:
+        division: '分類'
+        oil_type: '油種'
+        maker: 'メーカー'
+        number: 'ナンバー'
+        color: '色'
+        model: '車種・車名'
+        area: '地域'
+        hiragana: 'ひらがな'
+        class_num: '分類番号'
+        remarks: '備考'
+        created_at: '作成日時'
+        updated_at: '更新日時'
+
+  enums:
+    car:
+      oil_type:
+        diesel: '軽油'
+        gasoline: 'ガソリン'
+      division:
+        japanese: '国産/SUV・1BOX'
+        mazda: 'マツダ'
+        benz: 'メルセデス'
+        bmw: 'BMW'
+        foreign: '他外車'
+  table:
+    value:
+      car:
+        diesel: '軽油'
+        gasoline: 'ガソリン'
+        japanese: '国産/SUV・1BOX'
+        mazda: 'マツダ'
+        benz: 'メルセデス'
+        bmw: 'BMW'
+        foreign: '他外車'
