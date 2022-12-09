@@ -1,0 +1,50 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <% Car.column_names.select{ |key| key == 'division' || key == 'number' || key == 'color' }.each do |key| %>
+          <th scope="col"><%= I18n.t("activerecord.attributes.car." + key) %></th>
+        <% end %>
+        <th scope="col">その他</th>
+        <th scope="col"></th>
+    </tr>
+    </thread>
+    <tbody>
+      <% find_list.each do |list| %>
+        <tr class="table-column">
+          <% list.attributes.slice('division','number','color').each do |key,value| %>
+            <% if list.oil_type == "diesel" %>
+              <% if key == "number" %>
+                <td scope="row" class="diesel"><%= format("%04d",value) %></td>
+              <% elsif key == "division" %>
+                <td scope="row" class="diesel"><%= I18n.t("table.value.car." + value) %></td>
+              <% else %>
+                <td scope="row" class="diesel"><%= value %></td>
+              <% end %>
+              
+            <% else %>
+              <% if key == "number" %>
+                <td scope="row" class="gasoline"><%= format("%04d",value) %></td>
+              <% elsif key == "division" || key == "color" %>
+                <td scope="row" class="gasoline"><%= I18n.t("table.value.car." + value) %></td>
+              <% else %>
+                <td scope="row" class="gasoline"><%= value %></td>
+              <% end %>
+              
+            <% end %>
+            
+            
+          <% end %>
+          <% if list.present? %>
+            <% if list.oil_type =="diesel" %>
+              <td scope="row" class="diesel"><%= list.simple_etc.join("/") %></td>
+            <% else %>
+              <td scope="row" class="gasoline"><%= list.simple_etc.join("/") %></td>
+            <% end %>
+          <% end %>
+          <td scope="row"><%= link_to '詳細', cars_show_path(list.id), class: "btn btn-primary" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

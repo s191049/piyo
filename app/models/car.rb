@@ -48,4 +48,8 @@ class Car < ApplicationRecord
     search_hash = attributes.delete_if { |_k, v| v.nil? }
     Car.where(search_hash)
   end
+  
+  def simple_etc
+    [self.model, self.area, self.hiragana, self.maker, self.class_num, self.remarks].compact_blank
+  end
 end

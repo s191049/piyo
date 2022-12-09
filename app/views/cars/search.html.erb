@@ -9,7 +9,7 @@
 <% end %>
 
 <% if (defined? @car_list) != nil && @car_list.count > 0 %>
-  <%= render 'cars/table', find_list: @car_list %>
+  <%= render 'cars/simple_table', find_list: @car_list %>
 <% elsif (defined? @car_list) != nil %>
   <p><%= "#{I18n.t("activerecord.attributes.car.number")} #{@car.number}" %>は見つかりませんでした</p>
 <% end %>
