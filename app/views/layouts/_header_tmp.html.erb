@@ -1,0 +1,20 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <nav>
+      <ul class="nav navbar-nav nav-fill w-100 align-items-start">
+        <li class="nav-item"><%= link_to "ホーム", root_url %></li><!--
+        <li class="nav-item"><%= link_to "車番データ(未実装)", cars_new_path %></li>-->
+        <li class="nav-item"><%= link_to "掲示板(未実装)", '#' %></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">車番データ(未実装)</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><%= link_to "新規作成", cars_new_path, class:"dropdown-item" %></li>
+            <li><%= link_to "一覧", cars_index_path, class:"dropdown-item" %></li>
+            <li><%= link_to "検索", cars_search_path, class:"dropdown-item" %></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+

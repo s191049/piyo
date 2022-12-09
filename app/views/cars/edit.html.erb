@@ -1,0 +1,2 @@
+<% provide(:title,"編集") %>
+<%= render 'cars/form', car:@car, path:"#{cars_update_path}", submit_text:"編集", form_data:"{ turbo: false }" %>

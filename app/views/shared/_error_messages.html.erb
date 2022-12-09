@@ -1,0 +1,9 @@
+<% if @car.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+    <% @car.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

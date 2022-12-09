@@ -1,0 +1,15 @@
+<% provide(:title, "検索") %>
+
+<%= form_with(model: @car, url: cars_search_path, data: { turbo: false }) do |f| %>
+  <div class="form-group">
+    <%= f.label :ナンバー, class: "form-label" %>
+    <%= f.number_field :number, in: 1..9999, class: "form-control" %>
+  </div>
+  <%= f.submit :検索, class: "btn btn-primary" %>
+<% end %>
+
+<% if (defined? @car_list) != nil && @car_list.count > 0 %>
+  <%= render 'cars/table', find_list: @car_list %>
+<% elsif (defined? @car_list) != nil %>
+  <p><%= "#{I18n.t("activerecord.attributes.car.number")} #{@car.number}" %>は見つかりませんでした</p>
+<% end %>

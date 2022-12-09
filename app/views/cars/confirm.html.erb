@@ -1,0 +1,19 @@
+<% @car.attributes.except('id', 'created_at', 'updated_at').each do |key, item| %>
+  <% if key == "division" || key == "oil_type" %>
+    <p><%= I18n.t("activerecord.attributes.car." + key) %>：<%= I18n.t("table.value.car." + item) %></p>
+  <% else %>
+    <p><%= I18n.t("activerecord.attributes.car." + key) %>：<%= item %></p>
+  <% end %>
+<% end %>
+
+<% if @find_list.count > 0 %>
+  <p>似たようなもの一覧</p>
+  <%= render 'cars/table', find_list: @find_list %>
+<% end %>
+
+<%= form_with(model: @car, url: cars_create_path, data: { turbo: false }) do |f| %>
+  <% @car.attributes.each do |key,value| %>
+    <%= f.hidden_field key.to_sym %>
+  <% end %>
+  <%= f.submit '登録', class: "btn btn-primary" %>
+<% end %>

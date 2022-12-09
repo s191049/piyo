@@ -1,0 +1,7 @@
+<div class="btn-group">
+<% (1..9).each do |i| %>
+  <%= link_to i, "#{cars_index_path}/#{i.to_s}", class:"btn btn-primary" %>
+<% end %>
+</div>
+<p>車一覧</p>
+<%= render 'cars/table', find_list: @car_list %>

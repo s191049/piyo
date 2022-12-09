@@ -1,0 +1,61 @@
+<% provide(:title, '新規登録') %>
+
+<%= render 'cars/form', car:@car, path: cars_confirm_path, submit_text:"確認画面へ", form_data:{ turbo: false } %>
+
+<!--
+<%= form_with(model: @car, url: cars_confirm_path, data: { turbo: false }) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <div class="form-group">
+    <%= f.label :分類, class: "form-label" %>
+    <%= f.select :division, Car.divisions_i18n.invert, class: "form-select-lg" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :油種, class: "form-label" %>
+    <%= f.select :oil_type, Car.oil_types_i18n.invert, class:"form-select-lg" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :ナンバー, class: "form-label" %>
+    <%= f.number_field :number, in: 1..9999, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :色, class: "form-label" %>
+    <%= f.text_field :color, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :車種・車名, class: "form-label" %>
+    <%= f.text_field :model, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :地域名, class: "form-label" %>
+    <%= f.text_field :area, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :ひらがな, class: "form-label" %>
+    <%= f.text_field :hiragana, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :メーカー, class: "form-label" %>
+    <%= f.text_field :maker, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :分類番号, class: "form-label" %>
+    <%= f.text_field :class_num, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :備考, class: "form-label" %>
+    <%= f.text_field :remarks, class: "form-control" %>
+  </div>
+
+  <%= f.submit :登録, class: "btn btn-primary" %>
+<% end %>
+-->

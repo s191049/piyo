@@ -1,0 +1,42 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <% Car.column_names.reject{ |key| key == 'id'}.each do |key| %>
+          <th scope="col"><%= I18n.t("activerecord.attributes.car." + key) %></th>
+        <% end %>
+    </tr>
+    </thread>
+    <tbody>
+      <% find_list.each do |list| %>
+        <tr class="table-column">
+          <td scope="row"><%= link_to '詳細', cars_show_path(list.id), class: "btn btn-primary" %></td>
+          <% list.attributes.except('id').each do |key,value| %>
+            <% if list.oil_type == "diesel" %>
+              <% if key == "number" %>
+                <td scope="row" class="diesel"><%= format("%04d",value) %></td>
+              <% elsif key == "oil_type" || key == "division" %>
+                <td scope="row" class="diesel"><%= I18n.t("table.value.car." + value) %></td>
+              <% elsif key == "created_at" || key == "updated_at" %>
+                <td scope="row" class="diesel"><%= value.strftime("%Y-%m-%d %H:%M") %></td>
+              <% else %>
+                <td scope="row" class="diesel"><%= value %></td>
+              <% end %>
+            <% else %>
+              <% if key == "number" %>
+                <td scope="row" class="gasoline"><%= format("%04d",value) %></td>
+              <% elsif key == "oil_type" || key == "division" %>
+                <td scope="row" class="gasoline"><%= I18n.t("table.value.car." + value) %></td>
+              <% elsif key == "created_at" || key == "updated_at" %>
+                <td scope="row" class="gasoline"><%= value.strftime("%Y-%m-%d %H:%M") %></td>
+              <% else %>
+                <td scope="row" class="gasoline"><%= value %></td>
+              <% end %>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
