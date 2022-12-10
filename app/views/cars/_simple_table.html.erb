@@ -25,7 +25,7 @@
             <% else %>
               <% if key == "number" %>
                 <td scope="row" class="gasoline"><%= format("%04d",value) %></td>
-              <% elsif key == "division" || key == "color" %>
+              <% elsif key == "division" %>
                 <td scope="row" class="gasoline"><%= I18n.t("table.value.car." + value) %></td>
               <% else %>
                 <td scope="row" class="gasoline"><%= value %></td>
