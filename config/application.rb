@@ -2,6 +2,9 @@ require_relative "boot"
 
 require "rails/all"
 
+require "csv"
+
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -20,11 +23,11 @@ module Fuga
     # config.eager_load_paths << Rails.root.join("extras")
     
     
-    #デフォルト日本語化
+    #繝�繝輔か繝ｫ繝域律譛ｬ隱槫喧
     config.i18n.default_locale = :ja
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
-    #ロケールパス
+    #繝ｭ繧ｱ繝ｼ繝ｫ繝代せ
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
     
   end

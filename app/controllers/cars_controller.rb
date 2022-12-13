@@ -34,11 +34,10 @@ class CarsController < ApplicationController
     if params[:leading_digit].to_i.to_s == params[:leading_digit] && params[:leading_digit].to_i.between?(1,9)
       @car_list = Car.where("number LIKE ?", "#{params[:leading_digit]}%")
     else
-      @car_list = Car.all
+      redirect_to "#{cars_index_path}/1"
     end
   end
 
-  #多分使わない？
   def show
     @car = Car.find(params[:id])
   end
@@ -72,7 +71,16 @@ class CarsController < ApplicationController
     end
   end
 
-  def import; end
+  def import
+    unless params[:csv].nil?
+      if params[:csv].content_type != "text/csv"
+        flash.now[:danger] = "ファイルが不正です"
+        render 'import', status: :unprocessable_entity and return
+      else
+        Car.import(params[:csv])
+      end
+    end
+  end
 
   def export; end
 

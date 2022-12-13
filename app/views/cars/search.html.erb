@@ -5,16 +5,6 @@
     <%= f.label :分類, class: "form-label" %>
     <div class="form-check  btn-group d-md-flex justify-content-md-end center-block" data-toggle="buttons" role="group" aria-label="Basic radio toggle button group">
       <% Car.divisions.each do |key, value| %>
-      <!--
-        <label class="btn btn-outline-primary" style="width:20%">
-          <% if value == 0 %>
-            <%= f.radio_button(:division, key, class: "btn-check", autocomplete: "off", checked: true) %>
-          <% else %>
-            <%= f.radio_button(:division, key, class: "btn-check", autocomplete: "off") %>
-          <% end %>
-          <%= I18n.t("table.value.car." + key) %>
-        </label>
-      -->
         <%= f.radio_button(:division, key, class: "btn-check", autocomplete: "off") %>
         <%= f.label(:division, I18n.t("table.value.car." + key), value: key, class:"btn btn-outline-primary", style: "width:20%") %>
       <% end %>

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'cars/search'
   post 'cars/search'
   get 'cars/import'
+  post 'cars/import'
   get 'cars/export'
   root 'static_pages#home'
   get '/help',		to: 'static_pages#help'

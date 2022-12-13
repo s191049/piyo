@@ -1,2 +1,6 @@
 <h1>Cars#import</h1>
 <p>Find me in app/views/cars/import.html.erb</p>
+<%= form_with url: cars_import_path, multipart: true do |f| %>
+  <%= f.file_field :csv %>
+  <%= f.submit "インポート" %>
+<% end %>

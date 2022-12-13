@@ -93,4 +93,5 @@ gem 'rails-i18n'
 # rubocop
 gem 'rubocop', require: false
 gem 'rubocop-rails', require: false
-
+#CSV
+gem 'roo'

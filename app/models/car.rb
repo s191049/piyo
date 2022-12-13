@@ -52,4 +52,14 @@ class Car < ApplicationRecord
   def simple_etc
     [self.model, self.area, self.hiragana, self.maker, self.class_num, self.remarks].compact_blank
   end
+  
+  def self.import(csv)
+    if CSV.read(csv.path, headers: true, encoding: "cp932:UTF-8")[0].count == 6
+      CSV.foreach(csv.path, headers: true, encoding: "cp932:UTF-8") do |row|
+        unless Car.where(row.to_h).count > 0
+          Car.create(row.to_h)
+        end
+      end
+    end
+  end
 end
