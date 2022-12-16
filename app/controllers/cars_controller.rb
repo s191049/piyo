@@ -32,7 +32,7 @@ class CarsController < ApplicationController
   def index
     #debugger
     if params[:leading_digit].to_i.to_s == params[:leading_digit] && params[:leading_digit].to_i.between?(1,9)
-      @car_list = Car.where("number LIKE ?", "#{params[:leading_digit]}%")
+      @car_list = Car.order(number: :ASC).where("number LIKE ?", "#{params[:leading_digit]}%")
     else
       redirect_to "#{cars_index_path}/1"
     end

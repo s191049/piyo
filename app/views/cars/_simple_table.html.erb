@@ -2,7 +2,7 @@
   <table class="table">
     <thead>
       <tr>
-        <% Car.column_names.select{ |key| key == 'division' || key == 'number' || key == 'color' }.each do |key| %>
+        <% Car.column_names.select{ |key| key == 'number' || key == 'color' }.each do |key| %>
           <th scope="col"><%= I18n.t("activerecord.attributes.car." + key) %></th>
         <% end %>
         <th scope="col">その他</th>
@@ -12,7 +12,7 @@
     <tbody>
       <% find_list.each do |list| %>
         <tr class="table-column">
-          <% list.attributes.slice('division','number','color').each do |key,value| %>
+          <% list.attributes.slice('number','color').each do |key,value| %>
             <% if list.oil_type == "diesel" %>
               <% if key == "number" %>
                 <td scope="row" class="diesel"><%= format("%04d",value) %></td>
