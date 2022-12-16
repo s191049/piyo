@@ -11,7 +11,7 @@
     </thread>
     <tbody>
       <% find_list.each do |list| %>
-        <tr class="table-column">
+        <tr class="table-column simple-table-column">
           <% list.attributes.slice('number','color').each do |key,value| %>
             <% if list.oil_type == "diesel" %>
               <% if key == "number" %>

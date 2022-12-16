@@ -1,12 +1,16 @@
 <% provide(:title, "検索") %>
-
+<h1>車番データ検索</h1>
 <%= form_with(model: @car, url: cars_search_path, data: { turbo: false }) do |f| %>
   <p class="form-group">
     <%= f.label :分類, class: "form-label" %>
     <div class="form-check btn-group d-inline-flex justify-content-between row row-cols-5 flex-row" data-toggle="buttons" role="group" aria-label="Basic radio toggle button group">
       <% Car.divisions.each do |key, value| %>
         <%= f.radio_button(:division, key, class: "btn-check", autocomplete: "off") %>
-        <%= f.label(:division, I18n.t("table.value.car." + key), value: key, class:"btn btn-outline-primary col text-break d-flex align-items-center justify-content-center") %>
+        <% if value < 2 %>
+          <%= f.label(:division, I18n.t("table.value.car." + key), value: key, class:"btn btn-outline-success col text-break d-flex align-items-center justify-content-center") %>
+        <% else %>
+          <%= f.label(:division, I18n.t("table.value.car." + key), value: key, class:"btn btn-outline-primary col text-break d-flex align-items-center justify-content-center") %>
+        <% end %>
       <% end %>
     </div>
   </p>
@@ -21,7 +25,12 @@
 <% end %>
 
 <% if (defined? @car_list) != nil && @car_list.count > 0 %>
-  <%= render 'cars/simple_table', find_list: @car_list %>
+  <div id="search-result">
+    <%= render 'cars/simple_table', find_list: @car_list %>
+  </div>
 <% elsif (defined? @car_list) != nil %>
   <p>対象の車は見つかりませんでした</p>
+  <% if @car.number.present? %>
+    <%= link_to "#{@car.number}を新規作成", cars_new_path(car_number: @car.number, car_division: @car.division) %>
+  <% end %>
 <% end %>

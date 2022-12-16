@@ -1,6 +1,10 @@
 class CarsController < ApplicationController
   def new
-    @car = Car.new
+    if params[:car_number].nil?
+      @car = Car.new
+    else
+      @car = Car.new(number:params[:car_number], division:params[:car_division])
+    end
   end
 
   def confirm
@@ -68,6 +72,8 @@ class CarsController < ApplicationController
     else
       @car = Car.new(car_params)
       @car_list = @car.find_match
+      #redirect_to cars_search_path(@car_list, anchor: 'search-result') and return
+      render 'search' and return
     end
   end
 

@@ -55,12 +55,19 @@ footer {
 
 .diesel {
   color: green;
-  font-size: 1.3em;
 }
 
 .gasoline {
   color: red;
-  font-size: 1.3em;
+}
+
+.simple-table-column {
+  .diesel {
+    font-size: 1.3em;
+  }
+  .gasoline {
+    font-size: 1.3em;
+  }
 }
 
 .table-column {
@@ -71,10 +78,10 @@ footer {
 
 /* タブレット */
 @media(max-width: 1000px){
-  body { padding-top: 100px; }
+  body { padding-top: 80px; }
 }
 
 /* スマホ */
 @media(max-width: 500px){
-  body { padding-top: 100px; }
+  body { padding-top: 80px; }
 }
