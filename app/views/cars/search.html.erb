@@ -3,10 +3,10 @@
 <%= form_with(model: @car, url: cars_search_path, data: { turbo: false }) do |f| %>
   <div class="form-group">
     <%= f.label :分類, class: "form-label" %>
-    <div class="form-check  btn-group d-md-flex justify-content-md-end center-block" data-toggle="buttons" role="group" aria-label="Basic radio toggle button group">
+    <div class="form-check btn-group d-inline-flex justify-content-between row row-cols-5 flex-row" data-toggle="buttons" role="group" aria-label="Basic radio toggle button group">
       <% Car.divisions.each do |key, value| %>
         <%= f.radio_button(:division, key, class: "btn-check", autocomplete: "off") %>
-        <%= f.label(:division, I18n.t("table.value.car." + key), value: key, class:"btn btn-outline-primary", style: "width:20%") %>
+        <%= f.label(:division, I18n.t("table.value.car." + key), value: key, class:"btn btn-outline-primary col text-break") %>
       <% end %>
     </div>
   </div>
