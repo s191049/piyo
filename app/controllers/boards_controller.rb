@@ -10,17 +10,17 @@ class BoardsController < ApplicationController
   def create
     @board = Board.new(board_params)
     if @board.save
-      
+      @post = Post.new(name: @board.name)
     else
       flash.now[:danger] = "入力おかしいで"
       render 'new', status: :unprocessable_entity and return
     end
-    redirect_to boards_show_path(@board.id)
+    redirect_to boards_show_path(@board)
   end
 
   def show
     @board = Board.find(params[:id])
-    @post = Post.new unless defined? @post
+    @post = Post.new
   end
   
   private
@@ -28,4 +28,5 @@ class BoardsController < ApplicationController
   def board_params
     params.require(:board).permit(:title, :name, :body)
   end
+  
 end

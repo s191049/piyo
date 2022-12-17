@@ -1,19 +1,25 @@
-<% @car.attributes.except('id', 'created_at', 'updated_at').each do |key, item| %>
-  <% if key == "division" || key == "oil_type" %>
-    <p><%= I18n.t("activerecord.attributes.car." + key) %>：<%= I18n.t("table.value.car." + item) %></p>
-  <% else %>
-    <p><%= I18n.t("activerecord.attributes.car." + key) %>：<%= item %></p>
+<% provide(:title, "確認画面") %>
+<h1>確認画面</h1>
+<table class="table">
+  <% @car.attributes.except('id', 'created_at', 'updated_at').each do |key, item| %>
+    <tr>
+      <% if key == "division" || key == "oil_type" %>
+        <td><%= I18n.t("activerecord.attributes.car." + key) %></td><td><%= I18n.t("table.value.car." + item) %></td>
+      <% else %>
+        <td><%= I18n.t("activerecord.attributes.car." + key) %></td><td><%= item %></td>
+      <% end %>
+    </tr>
   <% end %>
-<% end %>
+</table>
 
 <% if @find_list.count > 0 %>
-  <p>似たようなもの一覧</p>
-  <%= render 'cars/table', find_list: @find_list %>
+  <h5>分類・ナンバー・油種が同じもの</h5>
+  <%= render 'cars/simple_table', find_list: @find_list %>
 <% end %>
 
 <%= form_with(model: @car, url: cars_create_path, data: { turbo: false }) do |f| %>
   <% @car.attributes.each do |key,value| %>
     <%= f.hidden_field key.to_sym %>
   <% end %>
-  <%= f.submit '登録', class: "btn btn-primary" %>
+  <%= f.submit '登録', class: "btn btn-lg btn-primary container-fluid" %>
 <% end %>

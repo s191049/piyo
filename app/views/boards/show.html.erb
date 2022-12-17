@@ -31,4 +31,5 @@
   <% end %>
 <% end %>
 
+<hr>
 <%= render 'boards/post_form', post:@post, path:posts_create_path, submit_text:"投稿", form_data: { turbo: false }, b_id:@board.id %>

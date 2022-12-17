@@ -45,8 +45,12 @@ class Car < ApplicationRecord
   # validates :remarks, allow_nil: true
 
   def find_match
-    search_hash = attributes.delete_if { |_k, v| v.nil? }
+    search_hash = attributes.delete_if { |_k, v| v.blank? }
     Car.where(search_hash)
+  end
+  
+  def confirm_list
+    Car.where(number: self.number, division: self.division, oil_type: self.oil_type)
   end
   
   def simple_etc

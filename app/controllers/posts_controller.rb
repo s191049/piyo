@@ -5,7 +5,6 @@ class PostsController < ApplicationController
     if @post.save
       @board.touch
       @post = Post.new(name:@post.name)
-      #redirect_to boards_show_path(@board, @post) and return
     else
       flash.now[:danger] = "入力おかしいで"
       render 'boards/show', collection: @board and return

@@ -1,4 +1,8 @@
 <% provide(:title, '一覧＠掲示板') %>
 <h1>一覧</h1>
 <p><%= link_to '新規作成はこちら', boards_new_path %></p>
-<%= render 'boards/index_table', find_list: @board_list %>
+<% if @board_list.count > 0 %>
+  <%= render 'boards/index_table', find_list: @board_list %>
+<% else %>
+  <p>スレッドがありません。</p>
+<% end %>

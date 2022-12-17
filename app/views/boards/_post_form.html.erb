@@ -3,15 +3,15 @@
 
   <%= f.hidden_field :board_id, value: b_id %>
   
-  <div class="form-group">
+  <p class="form-group">
     <%= f.label :名前, class: "form-label" %>
     <%= f.text_field :name, class: "form-control" %>
-  </div>
+  </p>
 
-  <div class="form-group">
+  <p class="form-group">
     <%= f.label :本文, class: "form-label" %>
     <%= f.text_area :body, class: "form-control" %>
-  </div>
+  </p>
   
-  <%= f.submit submit_text, class: "btn btn-primary" %>
+  <%= f.submit submit_text, class: "btn btn-primary btn-lg container-fluid" %>
 <% end %>

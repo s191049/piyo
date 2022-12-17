@@ -13,11 +13,11 @@ class CarsController < ApplicationController
       @car.save
       flash.now[:danger] = '入力おかしいで'
       render 'new', status: :unprocessable_entity and return
-    elsif @car.find_match.count > 0
+    elsif @car.confirm_list.count > 0
       # それっぽいのがあった場合
-      @find_list = @car.find_match
+      @find_list = @car.confirm_list
     else
-      @find_list = @car.find_match
+      @find_list = @car.confirm_list
     end
     # confirmにredirect
   end
@@ -84,6 +84,7 @@ class CarsController < ApplicationController
         render 'import', status: :unprocessable_entity and return
       else
         Car.import(params[:csv])
+        redirect_to cars_index_path
       end
     end
   end
