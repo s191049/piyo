@@ -2,6 +2,8 @@ ja:
   activerecord:
     models:
       car: '車'
+      board: '掲示板'
+      post: '投稿'
     attributes:
       car:
         division: '分類'
@@ -16,6 +18,19 @@ ja:
         remarks: '備考'
         created_at: '作成日時'
         updated_at: '更新日時'
+
+      board:
+        title: 'タイトル'
+        body: '本文'
+        created_at: '作成日時'
+        updated_at: '更新日時'
+
+      post:
+        name: '名前'
+        body: '本文'
+        created_at: '作成日時'
+        updated_at: '更新日時'
+
 
   enums:
     car:
@@ -38,3 +53,8 @@ ja:
         benz: 'メルセデス'
         bmw: 'BMW'
         foreign: '他外車'
+        
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+  

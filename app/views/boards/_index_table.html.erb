@@ -1,0 +1,21 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <% Board.column_names.select{ |key| key == 'title' || key == 'updated_at' }.each do |key| %>
+          <th scope="col"><%= I18n.t("activerecord.attributes.board." + key) %></th>
+        <% end %>
+      </tr>
+    </thread>
+    <tbody>
+      <% find_list.each do |list| %>
+        <tr class="table-column simple-table-column">
+          <td scope="row"><%= link_to "開く", boards_show_path(list.id), class: "btn btn-primary" %>
+          <td scope="row"><%= list.title %></td>
+          <td scope="row"><%= l list.updated_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

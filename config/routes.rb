@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  post 'posts/create'
+  
+  get 'boards/index'
+  get 'boards/new'
+  post 'boards/create'
+  get 'boards/show/:id', to: 'boards#show', as: 'boards_show'
+  
   get 'cars/new'
   post 'cars/confirm'
   post 'cars/create'
@@ -13,10 +20,12 @@ Rails.application.routes.draw do
   get 'cars/import'
   post 'cars/import'
   get 'cars/export'
+  
   root 'static_pages#home'
   get '/help',		to: 'static_pages#help'
   get '/about',		to: 'static_pages#about'
   get '/contact',	to: 'static_pages#contact'
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

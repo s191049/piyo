@@ -9,96 +9,16 @@
         <ul class="navbar-nav me-auto">
           <li class="nav-item"><%= link_to "ホーム", root_url, class: "nav-link active navbar-brand" %></li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle navbar-brand" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">車番データ(未実装)</a>
+            <a class="nav-link dropdown-toggle navbar-brand" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">車番データ</a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <li><%= link_to "新規作成", cars_new_path, class:"dropdown-item" %></li>
               <li><%= link_to "一覧", cars_index_path, class:"dropdown-item" %></li>
               <li><%= link_to "検索", cars_search_path, class:"dropdown-item" %></li>
             </ul>
           </li>
-          <li class="nav-item"><%= link_to "掲示板(未実装)", '#', class: "nav-link active navbar-brand" %></li>
+          <li class="nav-item"><%= link_to "掲示板", boards_index_path, class: "nav-link active navbar-brand" %></li>
         </ul>
       </div>
     </div>
   </nav>
 </header>
-
-
-<!--
-<header>
- <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">ブランド</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="ナビゲーションの切替">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbar">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">ホーム</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">リンク</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">無効</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ドロップダウン</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">リンク1</a></li>
-              <li><a class="dropdown-item" href="#">リンク2</a></li>
-              <li><a class="dropdown-item" href="#">リンク3</a></li>
-            </ul>
-          </li>
-        </ul>
-        <form class="d-flex" role="search">
-          <input type="search" class="form-control" placeholder="検索..." aria-label="検索...">
-        </form>
-      </div>
-    </div>
-  </nav>
-</header>
--->
-
-<!--
-<header>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar scroll</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarScroll">
-      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Link
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Link</a>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
-  </div>
-</nav>
-</header>
--->

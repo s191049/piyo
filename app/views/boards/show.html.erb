@@ -1,0 +1,34 @@
+<% provide(:title, "#{@board.title}＠掲示板") %>
+<h2><%= @board.title %></h2>
+<hr>
+<% if @board.name.blank? %>
+  <p>
+    <span class="post-num">1</span>
+    <span class="post-name">名無しだよ～ん</span>
+    <span class="post-time"><%= l @board.created_at %></span>
+  </p>
+<% else %>
+  <p>
+    <span class="post-num">1</span>
+    <span class="post-name"><%= @board.name %></span>
+    <span class="post-time"><%= l @board.created_at %></span>
+  </p>
+<% end %>
+<p><%= simple_format(@board.body) %></p>
+<% if @board.posts.count > 0 %>
+  <% @board.posts.each_with_index do |post, i| %>
+    <hr>
+      <p>
+        <span class="post-num"><%= i+2 %></span>
+        <% if post.name.blank? %>
+          <span class="post-name">名無しだよ～ん</span>
+        <% else %>
+          <span class="post-name"><%= post.name %></span>
+        <% end %>
+        <span class="post-time"><%= l post.created_at %></span>
+      </p>
+    <p><%= simple_format(post.body) %></p>
+  <% end %>
+<% end %>
+
+<%= render 'boards/post_form', post:@post, path:posts_create_path, submit_text:"投稿", form_data: { turbo: false }, b_id:@board.id %>
