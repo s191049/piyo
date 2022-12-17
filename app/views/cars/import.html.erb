@@ -1,6 +1,6 @@
 <h1>インポート</h1>
 <p>Excelから抽出したCSVファイルのデータを取り込みます。</p>
 <%= form_with url: cars_import_path, multipart: true do |f| %>
-  <%= f.file_field :csv %>
-  <%= f.submit "インポート" %>
+  <p><%= f.file_field :csv, accept: 'text/csv', class:"btn btn-secondary"%></p>
+  <p><%= f.submit "インポート", class:"btn btn-primary" %></p>
 <% end %>
