@@ -67,8 +67,10 @@ class Car < ApplicationRecord
   def self.export
     csv_data = CSV.generate(encoding: Encoding::CP932) do |csv|
       csv << array_cp932(Car.attribute_names)
-      Car.all.each do |car|
-        csv << array_cp932(car.attributes.values)
+      (1..9).each do |i|
+        Car.where("number LIKE ?", "#{i}%").order(number: :ASC).each do |car|
+          csv << array_cp932(car.attributes.values)
+        end
       end
     end
     csv_data
