@@ -1,6 +1,6 @@
 # README
 
-##必要パッケージ導入まで
+## 必要パッケージ導入まで
 
 sudo apt-get update && sudo apt-get upgrade -y
 
@@ -46,7 +46,7 @@ gem install -v 7.0.4 rails
 
 
 
-##このアプリのセットアップまで
+## このアプリのセットアップまで
 
 cd
 
@@ -62,7 +62,7 @@ rails db:migrate:reset
 
 
 
-##起動方法
+## 起動方法
 
 cd ~/piyo
 
