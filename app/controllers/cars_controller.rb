@@ -95,7 +95,7 @@ class CarsController < ApplicationController
 
   def car_params
     params.require(:car).permit(:division, :oil_type, :number,
-                                :color, :model, :area, :hiragana,
-                                :maker, :class_num, :remarks)
+                                :color, :model_mfr, :area,
+                                 :hiragana, :class_num, :remarks)
   end
 end

@@ -7,17 +7,14 @@ class Car < ApplicationRecord
   enum division: { japanese: 0, mazda: 1, benz: 2, bmw: 3, foreign: 4 }
   validates :division, presence: true
 
-  # メーカーは任意 string
-  # validates :maker, allow_nil: true
-
   # 車番は必須 int型1〜9999まで
   validates :number, numericality: { in: 1..9999 }
 
   # 色は任意 string
   # validates :color, allow_nil: true
 
-  # 車種は任意 string
-  # validates :model, allow_nil: true
+  # 車種メーカーは任意 string
+  # validates :model_mfr, allow_nil: true
 
   # 地域名は任意 string
   # validates :area, allow_nil: true
@@ -54,7 +51,7 @@ class Car < ApplicationRecord
   end
   
   def simple_etc
-    [self.model, self.area, self.hiragana, self.maker, self.class_num, self.remarks].compact_blank
+    [self.model_mfr, self.area, self.hiragana, self.class_num, self.remarks].compact_blank
   end
   
   def self.import(csv)

@@ -24,10 +24,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_17_062818) do
     t.integer "oil_type"
     t.integer "number"
     t.string "color"
-    t.string "model"
+    t.string "model_mfr"
     t.string "area"
     t.string "hiragana"
-    t.string "maker"
     t.string "class_num"
     t.string "remarks"
     t.datetime "created_at", null: false

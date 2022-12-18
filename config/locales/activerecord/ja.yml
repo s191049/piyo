@@ -8,10 +8,9 @@ ja:
       car:
         division: '分類'
         oil_type: '油種'
-        maker: 'メーカー'
         number: 'ナンバー'
         color: '色'
-        model: '車種・車名'
+        model_mfr: '車種・車名/メーカー'
         area: '地域'
         hiragana: 'ひらがな'
         class_num: '分類番号'
