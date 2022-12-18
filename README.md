@@ -28,8 +28,6 @@ rbenv global 3.1.3
 
 
 
-sudo apt-get install -y npm
-
 sudo npm install n -g
 
 sudo n stable
