@@ -63,4 +63,26 @@ class Car < ApplicationRecord
       end
     end
   end
+  
+  def self.export
+    csv_data = CSV.generate(encoding: Encoding::CP932) do |csv|
+      csv << array_cp932(Car.attribute_names)
+      Car.all.each do |car|
+        csv << array_cp932(car.attributes.values)
+      end
+    end
+    csv_data
+  end
+
+  
+  private
+  
+  def self.array_cp932(array)
+    new_array = array.map { |s|
+      s = s.to_s
+      s.encode("CP932")
+    }
+    new_array
+  end
+
 end

@@ -1,2 +1,4 @@
-<h1>Cars#export</h1>
-<p>Find me in app/views/cars/export.html.erb</p>
+<h1>エクスポート</h1>
+<p>Excel用のデータをこのアプリから抽出します。</p>
+<p><%= link_to "インポートはこちら", cars_import_path %></p>
+<%= link_to "エクスポート", cars_export_path(format: :csv), class:"btn btn-primary" %>
