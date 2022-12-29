@@ -1,4 +1,6 @@
 class BoardsController < ApplicationController
+  before_action :invalid_ops, only: [:create]
+
   def index
     @board_list = Board.all.order(updated_at: :DESC)
   end

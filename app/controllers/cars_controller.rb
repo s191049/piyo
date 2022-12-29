@@ -1,4 +1,5 @@
 class CarsController < ApplicationController
+  before_action :invalid_ops, only: [:confirm, :create]
   def new
     if params[:car_number].nil?
       @car = Car.new
@@ -8,6 +9,7 @@ class CarsController < ApplicationController
   end
 
   def confirm
+    #if request.post?
     @car = Car.new(car_params)
     if @car.invalid?
       @car.save

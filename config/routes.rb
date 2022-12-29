@@ -1,14 +1,18 @@
 Rails.application.routes.draw do
   post 'posts/create'
+  get 'posts/create'
   
   get 'boards/index'
   get 'boards/new'
   post 'boards/create'
+  get 'boards/create'
   get 'boards/show/:id', to: 'boards#show', as: 'boards_show'
   
   get 'cars/new'
   post 'cars/confirm'
+  get 'cars/confirm'
   post 'cars/create'
+  get 'cars/create'
   get 'cars/index'
   get 'cars/index/:leading_digit', to: 'cars#index'
   get 'cars/show/:id', to: 'cars#show', as: 'cars_show'
