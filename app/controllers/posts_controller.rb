@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :invalid_ops, only[:create]
+  before_action :invalid_ops, only: [:create]
 
   def create
     @post = Post.new(post_params)
