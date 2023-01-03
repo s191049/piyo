@@ -12,6 +12,11 @@
     <%= f.label :本文, class: "form-label" %>
     <%= f.text_area :body, class: "form-control" %>
   </p>
+
+  <p class="form-group">
+    <%= f.label :ファイル, class: "form-label" %>
+    <%= f.file_field :attached_files, multiple: true %>
+  </p>
   
   <%= f.submit submit_text, class: "btn btn-primary btn-lg container-fluid" %>
 <% end %>

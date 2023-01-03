@@ -77,8 +77,6 @@ class Car < ApplicationRecord
   end
 
   
-  private
-  
   def self.array_cp932(array)
     new_array = array.map { |s|
       s = s.to_s

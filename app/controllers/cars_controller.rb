@@ -94,7 +94,7 @@ class CarsController < ApplicationController
   def export    
     respond_to do |format|
       format.html
-      format.csv do |csv|
+      format.csv do
         csv_data = Car.export
         csv_name = "export#{Time.now.strftime("%F%T").delete("^0-9")}.csv"
         send_data(csv_data, filename: csv_name)

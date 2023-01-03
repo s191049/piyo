@@ -18,16 +18,23 @@
 <% if @board.posts.count > 0 %>
   <% @board.posts.each_with_index do |post, i| %>
     <hr>
-      <p>
-        <span class="post-num"><%= i+2 %></span>
-        <% if post.name.blank? %>
-          <span class="post-name">名無しだよ～ん</span>
-        <% else %>
-          <span class="post-name"><%= post.name %></span>
-        <% end %>
-        <span class="post-time"><%= l post.created_at %></span>
-      </p>
+    <p>
+      <span class="post-num"><%= i+2 %></span>
+      <% if post.name.blank? %>
+        <span class="post-name">名無しだよ～ん</span>
+      <% else %>
+        <span class="post-name"><%= post.name %></span>
+      <% end %>
+      <span class="post-time"><%= l post.created_at %></span>
+    </p>
     <p><%= simple_format(post.body) %></p>
+    <% if post.attached_files.attached? %>
+      <p class="post-files-field">
+        <% post.attached_files.each do |attached_file| %>
+          <%= link_to attached_file.blob.filename, rails_blob_path(attached_file, disposition: "inline"), class: "btn btn-primary rounded-pill btn-sm mt-1", role:"button" %>
+        <% end %>
+      </p>
+    <% end %>
   <% end %>
 <% end %>
 

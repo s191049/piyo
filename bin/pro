@@ -6,4 +6,6 @@ then
   gem install foreman
 fi
 
+rails assets:precompile
+RAILS_ENV=production rails db:migrate
 foreman start -f Procfile_pro.dev "$@"

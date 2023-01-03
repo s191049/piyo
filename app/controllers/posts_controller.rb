@@ -17,6 +17,6 @@ class PostsController < ApplicationController
   private
   
   def post_params
-    params.require(:post).permit(:board_id, :name, :body)
+    params.require(:post).permit(:board_id, :name, :body, attached_files: [])
   end
 end
