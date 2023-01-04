@@ -1,6 +1,13 @@
+<script>
+function clearForm() {
+  //$("#search_form")[0].reset();
+  $("#search_form").find("textarea, :text, select").val("").end().find(":checked").prop("checked", false);
+}
+
+</script>
 <% provide(:title, "検索") %>
 <h1>車番データ検索</h1>
-<%= form_with(model: @car, url: cars_search_path, data: { turbo: false }) do |f| %>
+<%= form_with(model: @car, url: cars_search_path, data: { turbo: false }, id: "search_form") do |f| %>
   <p class="form-group">
     <%= f.label :分類, class: "form-label" %>
     <div class="form-check btn-group d-inline-flex justify-content-between row row-cols-5 flex-row" data-toggle="buttons" role="group" aria-label="Basic radio toggle button group">
@@ -17,19 +24,22 @@
 
   <p class="form-group">
     <%= f.label :ナンバー, class: "form-label" %>
-    <%= f.number_field :number, in: 1..9999, class: "form-control" %>
+    <%= f.text_field :number, inputmode:"numeric", pattern: "000[1-9]|00[1-9][0-9]|0[1-9][0-9]{2}|[1-9][0-9]{0,3}", class: "form-control" %>
   </p>
   <div class="d-grid gap-2">
     <%= f.submit :検索, class: "btn btn-primary" %>
+    <%= button_tag :クリア, type: "button", class: "btn btn-danger", onclick:"clearForm()"%>
   </div>
 <% end %>
 
-<% if (defined? @car_list) != nil && @car_list.count > 0 %>
-  <div id="search-result">
-    <%= render 'cars/simple_table', find_list: @car_list %>
-  </div>
-<% elsif (defined? @car_list) != nil %>
-  <p>対象の車は見つかりませんでした</p>
+<% if (defined? @car_list) != nil %>
+  <% if @car_list.count > 0 %>
+    <div id="search-result">
+      <%= render 'cars/simple_table', find_list: @car_list %>
+    </div>
+  <% else %>
+    <p style="font-size:1.3em; line-height:2em">対象の車は見つかりませんでした</p>
+  <% end %>
   <% if @car.number.present? %>
     <%= link_to "#{@car.number}を新規作成", cars_new_path(car_number: @car.number, car_division: @car.division) %>
   <% end %>
