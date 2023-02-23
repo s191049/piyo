@@ -1,4 +1,4 @@
-<%= form_with(model: car, url: path, data: form_data) do |f| %>
+<%= form_with(model: car, url: path, data: form_data, autocomplete: "off") do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
   <p class="form-group">
@@ -13,37 +13,37 @@
 
   <p class="form-group">
     <%= f.label :ナンバー, class: "form-label" %>
-    <%= f.number_field :number, in: 1..9999, class: "form-control" %>
+    <%= f.number_field :number, in: 1..9999, class: "form-control", autocomplete: "off" %>
   </p>
 
   <p class="form-group">
     <%= f.label :色, class: "form-label" %>
-    <%= f.text_field :color, class: "form-control" %>
+    <%= f.text_field :color, class: "form-control", autocomplete: "off" %>
   </p>
 
   <p class="form-group">
     <%= f.label :"車種・車名/メーカー", class: "form-label" %>
-    <%= f.text_field :model_mfr, class: "form-control" %>
+    <%= f.text_field :model_mfr, class: "form-control", autocomplete: "off" %>
   </p>
 
   <p class="form-group">
     <%= f.label :地域名, class: "form-label" %>
-    <%= f.text_field :area, class: "form-control" %>
+    <%= f.text_field :area, class: "form-control", autocomplete: "off" %>
   </p>
 
   <p class="form-group">
     <%= f.label :ひらがな, class: "form-label" %>
-    <%= f.text_field :hiragana, class: "form-control" %>
+    <%= f.text_field :hiragana, class: "form-control", autocomplete: "off" %>
   </p>
 
   <p class="form-group">
     <%= f.label :分類番号, class: "form-label" %>
-    <%= f.text_field :class_num, class: "form-control" %>
+    <%= f.text_field :class_num, class: "form-control", autocomplete: "off" %>
   </p>
 
   <p class="form-group">
     <%= f.label :備考, class: "form-label" %>
-    <%= f.text_field :remarks, class: "form-control" %>
+    <%= f.text_field :remarks, class: "form-control", autocomplete: "off" %>
   </p>
 
   <p><%= f.submit submit_text, class: "btn btn-primary btn-lg container-fluid" %></p>
