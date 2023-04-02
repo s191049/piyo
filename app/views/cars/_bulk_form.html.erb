@@ -1,0 +1,38 @@
+<%= form_with(model: cars_list, url:path, data:form_data, autocomplete:"off") do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+    <%= f.fields_for :cars do |car_form| %>
+      <% if car_form.index == 0 %>
+        <div class="row">
+          <div class="col-4">分類</div>
+          <div class="col"><%= car_form.select :division, Car.divisions_i18n.invert, class: "form-select-lg" %></div>
+        </div>
+      <% end %>
+      <% if car_form.index == 0 %>
+        <table>
+          <thead>
+            <tr class="row">
+              <th class="col-1">油種</th>
+              <th class="col-2">車番</th>
+              <th class="col-2">色</th>
+              <th class="col-3">車名</th>
+              <th class="col">備考</th>
+            </tr>
+          </thead>
+          <tbody>
+      <% end %>
+          <tr class="row">
+            <td class="col-1"><%= car_form.select :oil_type, Car.oil_types_i18n.invert.map{|m| [m.first.slice(0),m.second]}, class:"form-select mw-100" %></td>
+            <td class="col-2"><%= car_form.text_field :number, inputmode:"numeric", pattern: "000[1-9]|00[1-9][0-9]|0[1-9][0-9]{2}|[1-9][0-9]{0,3}", class: "form-control", autocomplete: "off" %></td>
+            <td class="col-2"><%= car_form.text_field :color, class: "form-control", autocomplete: "off" %></td>
+            <td class="col-3"><%= car_form.text_field :model_mfr, class: "form-control", autocomplete: "off" %></td>
+            <td class="col"><%= car_form.text_field :remarks, class: "form-control", autocomplete: "off" %></td>
+          </tr>
+      <% if car_form.index == (cars_list.cars.size - 1) %>
+
+        </tbody>
+      </table>      
+      <% end %>
+    <% end %>
+  <%# end %>
+  <p><%= f.submit submit_text, class: "btn btn-primary btn-lg container-fluid" %></p>
+<% end %>

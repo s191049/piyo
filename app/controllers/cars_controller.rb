@@ -8,6 +8,10 @@ class CarsController < ApplicationController
     end
   end
 
+  def bulk_new
+    @form = Form::CarCollection.new
+  end
+
   def confirm
     #if request.post?
     @car = Car.new(car_params)
@@ -32,6 +36,19 @@ class CarsController < ApplicationController
     else
       flash.now[:danger] = "あかんかったわ"
       render 'new', status: :unprocessable_entity and return
+    end
+  end
+
+  def bulk_create
+    @form = Form::CarCollection.new(car_collection_params)
+    
+    before_cnt = Car.count
+    if @form.save
+      flash[:success] = "#{Car.count - before_cnt}件登録しました。"
+      redirect_to cars_bulk_new_path
+    else
+      flash.now[:danger] = "失敗しました"
+      render 'bulk_new', status: :unprocessable_entity and return
     end
   end
   
@@ -109,5 +126,11 @@ class CarsController < ApplicationController
                                 :color, :model_mfr, :area,
                                  :hiragana, :class_num, :remarks)
   end
-  
+
+  def car_collection_params
+    params.require(:form_car_collection)
+    .permit(cars_attributes: [:division, :oil_type, :number,
+                                :color, :model_mfr, :area,
+                                 :hiragana, :class_num, :remarks])
+  end
 end

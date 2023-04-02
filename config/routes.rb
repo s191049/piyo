@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   get 'cars/import'
   post 'cars/import'
   get 'cars/export'
+  get 'cars/bulk_new'
+  post 'cars/bulk_create'
   
   root 'static_pages#home'
   get '/help',		to: 'static_pages#help'

@@ -1,0 +1,6 @@
+<% provide(:title, '一括登録') %>
+
+<h1>新規作成</h1>
+<p><%= link_to "インポートはこちら", cars_import_path %></p>
+
+<%= render 'cars/bulk_form', cars_list:@form, path: cars_bulk_create_path, submit_text:"一括作成", form_data:{ turbo: false } %>
