@@ -2,6 +2,7 @@
 
 <h1>新規作成</h1>
 <p><%= link_to "インポートはこちら", cars_import_path %></p>
+<p><%= link_to "一括登録はこちら", cars_bulk_new_path %></p>
 
 <%= render 'cars/form', car:@car, path: cars_confirm_path, submit_text:"確認画面へ", form_data:{ turbo: false } %>
 
