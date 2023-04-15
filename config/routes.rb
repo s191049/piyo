@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get 'cars/export'
   get 'cars/bulk_new'
   post 'cars/bulk_create'
+  get 'cars/excel_export'
   
   root 'static_pages#home'
   get '/help',		to: 'static_pages#help'

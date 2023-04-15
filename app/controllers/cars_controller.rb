@@ -119,6 +119,17 @@ class CarsController < ApplicationController
     end
   end
 
+  def excel_export
+    respond_to do |format|
+      format.html
+      format.xlsx do
+        xlsx_data = Car.excel_export
+        xlsx_name = "油種#{Time.now.strftime("%F%T").delete("^0-9")}.xlsx"
+        send_data(xlsx_data, filename: xlsx_name)
+      end
+    end
+  end
+
   private
 
   def car_params

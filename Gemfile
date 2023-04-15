@@ -95,3 +95,5 @@ gem 'rubocop', require: false
 gem 'rubocop-rails', require: false
 #CSV
 gem 'roo'
+#excel
+gem 'rubyXL'

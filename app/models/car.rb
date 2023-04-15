@@ -85,4 +85,172 @@ class Car < ApplicationRecord
     new_array
   end
 
+  GREEN = "548235"
+  RED = "FF0000"
+  FONT = '游ゴシック'
+  FONT_SIZE = 11
+  COL_MAX = 36
+
+  def self.excel_export
+
+    workbook = RubyXL::Parser.parse("app/assets/excels/base.xlsx")
+    #国産車
+    (1..9).each do |i|
+      (-1..9).each do |j|
+        japanese_cars = pick_cars(i,j,0)
+        mazda_cars = pick_cars(i,j,1)
+        sheet_count = [japanese_cars.count, mazda_cars.count].max
+        (0...sheet_count).each do |k|
+          #シートコピー
+          sheet_name = name_sheet(true, i, j)
+          if k > 0
+            sheet_name = sheet_name + "-#{k}"
+          end
+          workbook = copy_sheet(workbook, sheet_name, true)
+          worksheet = workbook[sheet_name]
+
+          #cell挿入
+          unless japanese_cars[k].nil?
+            worksheet = insert_cells(worksheet, japanese_cars[k])
+          end
+          unless mazda_cars[k].nil?
+            worksheet = insert_cells(worksheet, mazda_cars[k])
+          end
+        end
+      end
+    end
+    #外車
+    (1..9).each do |i|
+      (-1..9).each do |j|
+        benz_cars = pick_cars(i,j,2)
+        bmw_cars = pick_cars(i,j,3)
+        foreign_cars = pick_cars(i,j,4)
+        sheet_count = [benz_cars.count, bmw_cars.count, foreign_cars.count].max
+        (0...sheet_count).each do |k|
+          #シートコピー
+          sheet_name = name_sheet(false, i, j)
+          if k > 0
+            sheet_name = sheet_name + "-#{k}"
+          end
+          workbook = copy_sheet(workbook, sheet_name, false)
+          worksheet = workbook[sheet_name]
+
+          #cell挿入
+          unless benz_cars[k].nil?
+            worksheet = insert_cells(worksheet, benz_cars[k])
+          end
+          unless bmw_cars[k].nil?
+            worksheet = insert_cells(worksheet, bmw_cars[k])
+          end
+          unless foreign_cars[k].nil?
+            worksheet = insert_cells(worksheet, foreign_cars[k])
+          end
+        end
+      end
+    end
+    data = workbook.stream.read
+    return data
+  end
+
+  def self.test_pick
+    p pick_cars(3,-1,"benz")
+  end
+
+  def merge_remarks_for_excel
+    [self.area, self.hiragana, self.class_num, self.remarks].compact_blank.join(" ")
+  end
+
+
+  private
+
+  def self.copy_sheet(workbook, sheet_name, is_japanese)
+    #tes
+    if is_japanese
+      template = workbook['国白紙']
+    else
+      template = workbook['外白紙']
+    end
+    worksheet = workbook.add_worksheet(sheet_name)
+    worksheet.sheet_data = template.sheet_data.dup
+    worksheet.sheet_data.rows = template.sheet_data.rows.map do |row|
+      next unless row
+      new_row = row.dup
+      new_row.worksheet = worksheet
+      new_row.cells = row.cells.map{ |cell| next unless cell; new_cell = cell.dup; new_cell.worksheet = worksheet; new_cell }
+      new_row
+    end
+    worksheet.cols = Marshal.load(Marshal.dump(template.cols))
+    worksheet.merged_cells = Marshal.load(Marshal.dump(template.merged_cells))
+    return workbook
+  end
+
+  def self.pick_cars(ini_num, turn_num, target_div)
+    targets_array = []
+    if turn_num == -1
+      targets = Car.order(:number, :asc).where("number < 1000").where("number LIKE ?", "#{ini_num}%").where(division: target_div)
+    else
+      targets = Car.order(:number, :asc).where("number >= #{ini_num*1000}").where("number LIKE ?", "#{ini_num*10+turn_num}%").where(division: target_div)
+    end
+    for i in 0..((targets.count - 1)/COL_MAX)
+      targets_array[i] = []
+    end
+    targets.each_with_index do |tar, i|
+      targets_array[i / COL_MAX] << tar
+    end
+    return targets_array
+  end
+
+  def self.name_sheet(is_japanese, ini_num, cnt_num)
+    sheet_name = ''
+    if is_japanese
+      sheet_name = '国'
+    else
+      sheet_name = '外'
+    end
+    if cnt_num == -1
+      sheet_name = sheet_name + 0.to_s + ini_num.to_s
+    else
+      sheet_name = sheet_name + "#{ini_num * 10 + cnt_num}"
+    end
+    return sheet_name
+  end
+
+  def self.insert_cells(worksheet, target_cars)
+    start_col = -1
+    case target_cars.first.division
+    when "japanese" then
+      start_col = 0
+    when "mazda" then
+      start_col = 4
+    when "benz" then
+      start_col = 0
+    when "bmw" then
+      start_col = 4
+    when "foreign" then
+      start_col = 8
+    end
+    for i in 0...target_cars.count
+      font_color = RED
+      if target_cars[i].oil_type == "diesel"
+        font_color = GREEN
+      end
+      cell_style_index = Array.new(4)
+      for j in 0...4
+        cell_style_index[j] = worksheet[i+2][start_col+j].style_index.deep_dup
+      end
+      worksheet.add_cell(i+2,start_col,format("%04d",target_cars[i].number))
+      worksheet.add_cell(i+2,start_col+1,target_cars[i].color)
+      worksheet.add_cell(i+2,start_col+2,target_cars[i].model_mfr)
+      worksheet.add_cell(i+2,start_col+3,target_cars[i].merge_remarks_for_excel)
+      for j in 0...4
+        worksheet[i+2][start_col+j].style_index = cell_style_index[j]
+        worksheet[i+2][start_col+j].change_font_name FONT
+        worksheet[i+2][start_col+j].change_font_size FONT_SIZE
+        worksheet[i+2][start_col+j].change_font_color(font_color)
+      end
+    end
+    return worksheet
+  end
+
+
 end

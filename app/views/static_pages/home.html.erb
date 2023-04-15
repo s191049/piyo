@@ -6,4 +6,5 @@
 <div class="d-grid gap-2">
   <p><%= link_to "車番データ検索", cars_search_path, class: 'btn btn-lg btn-info container-fluid' %></p>
   <p><%= link_to "掲示板", boards_index_path, class: 'btn btn-lg btn-info container-fluid' %></p>
+  <p><%= link_to "エクセル出力", cars_excel_export_path(format: :xlsx), class: 'btn btn-lg btn-primary container-fluid' %></p>
 </div>
