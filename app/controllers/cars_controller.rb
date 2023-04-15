@@ -144,4 +144,5 @@ class CarsController < ApplicationController
                                 :color, :model_mfr, :area,
                                  :hiragana, :class_num, :remarks])
   end
+  
 end

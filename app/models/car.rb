@@ -93,7 +93,7 @@ class Car < ApplicationRecord
 
   def self.excel_export
 
-    workbook = RubyXL::Parser.parse("app/assets/excels/base.xlsx")
+    workbook = RubyXL::Parser.parse(Rails.root + "app/assets/excels/base.xlsx")
     #国産車
     (1..9).each do |i|
       (-1..9).each do |j|
