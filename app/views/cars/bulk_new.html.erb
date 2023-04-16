@@ -1,4 +1,5 @@
 <% provide(:title, '一括登録') %>
+<%= javascript_include_tag "cars_bulk_new.js", 'data-turbolinks-track': 'reload', defer: true %>
 
 <h1>新規作成</h1>
 <p><%= link_to "インポートはこちら", cars_import_path %></p>
