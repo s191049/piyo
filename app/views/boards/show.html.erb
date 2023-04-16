@@ -1,5 +1,11 @@
 <% provide(:title, "#{@board.title}＠掲示板") %>
-<h2><%= @board.title %></h2>
+<div class="row">
+  <h2 class="col"><%= @board.title %></h2>
+  <div class="col d-flex justify-content-end">
+    <%= link_to '削除', boards_destroy_path, data: { turbo_method: :delete, turbo_confirm: "ほんまに消すん？" }, class: "btn btn-danger" %>
+  </div>
+</div>
+<%= paginate @post_list, theme: 'bootstrap-5' %>
 <hr>
 <% if @board.name.blank? %>
   <p>
@@ -15,11 +21,11 @@
   </p>
 <% end %>
 <p><%= simple_format(@board.body) %></p>
-<% if @board.posts.count > 0 %>
-  <% @board.posts.each_with_index do |post, i| %>
+<% if @post_list.count > 0 %>
+  <% @post_list.each_with_index do |post, i| %>
     <hr>
     <p>
-      <span class="post-num"><%= i+2 %></span>
+      <span class="post-num"><%= i+2+(@post_list.current_page-1)*posts_per_page %></span>
       <% if post.name.blank? %>
         <span class="post-name">名無しだよ～ん</span>
       <% else %>
@@ -39,4 +45,7 @@
 <% end %>
 
 <hr>
+
+<%= paginate @post_list, theme: 'bootstrap-5' %>
+
 <%= render 'boards/post_form', post:@post, path:posts_create_path, submit_text:"投稿", form_data: { turbo: false }, b_id:@board.id %>

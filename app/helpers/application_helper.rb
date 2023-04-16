@@ -7,4 +7,12 @@ module ApplicationHelper
       page_title + ' | ' + base_title
     end
   end
+
+  def posts_per_page
+    20
+  end
+
+  def boards_per_page
+    8
+  end
 end

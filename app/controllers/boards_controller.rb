@@ -1,8 +1,9 @@
 class BoardsController < ApplicationController
+  include ApplicationHelper
   before_action :invalid_ops, only: [:create]
 
   def index
-    @board_list = Board.all.order(updated_at: :DESC)
+    @board_list = Board.all.order(updated_at: :DESC).page(params[:page]).per(boards_per_page)
   end
 
   def new
@@ -22,7 +23,14 @@ class BoardsController < ApplicationController
 
   def show
     @board = Board.find(params[:id])
+    @post_list = @board.posts.page(params[:page]).per(posts_per_page)
     @post = Post.new
+  end
+
+  def destroy
+    Board.find(params[:id]).destroy
+    flash[:success] = "消したで"
+    redirect_to boards_index_path
   end
   
   private

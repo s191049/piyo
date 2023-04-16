@@ -33,6 +33,13 @@ function clearForm() {
 <% end %>
 
 <% if (defined? @car_list) != nil %>
+  <p style="font-size:1.3em; line-height:2em">
+    <% if @car.search_conditions.present? %>
+      <%= @car.search_conditions + " の検索結果" %>
+    <% else %>
+    <%= "検索結果" %>
+    <% end %>
+  </p>
   <% if @car_list.count > 0 %>
     <div id="search-result">
       <%= render 'cars/simple_table', find_list: @car_list %>
@@ -41,6 +48,6 @@ function clearForm() {
     <p style="font-size:1.3em; line-height:2em">対象の車は見つかりませんでした</p>
   <% end %>
   <% if @car.number.present? %>
-    <%= link_to "#{@car.number}を新規作成", cars_new_path(car_number: @car.number, car_division: @car.division) %>
+    <%= link_to "#{@car.search_conditions}を新規作成", cars_new_path(car_number: @car.number, car_division: @car.division) %>
   <% end %>
 <% end %>

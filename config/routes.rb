@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post 'boards/create'
   get 'boards/create'
   get 'boards/show/:id', to: 'boards#show', as: 'boards_show'
+  delete 'boards/destroy/:id', to: 'boards#destroy', as: 'boards_destroy'
   
   get 'cars/new'
   post 'cars/confirm'

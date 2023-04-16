@@ -97,3 +97,6 @@ gem 'rubocop-rails', require: false
 gem 'roo'
 #excel
 gem 'rubyXL'
+#pagenation
+gem 'kaminari'
+gem 'bootstrap5-kaminari-views'

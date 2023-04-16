@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  include ApplicationHelper
   before_action :invalid_ops, only: [:create]
 
   def create
@@ -7,11 +8,14 @@ class PostsController < ApplicationController
     if @post.save
       @board.touch
       @post = Post.new(name:@post.name)
+      @post_list = @board.posts.page(params[:page]).per(posts_per_page)
     else
       flash.now[:danger] = "入力おかしいで"
+      @post_list = @board.posts.page(params[:page]).per(posts_per_page)
       render 'boards/show', collection: @board and return
     end
-    render 'boards/show', collection: @board
+    # render 'boards/show', collection: @board
+    redirect_to boards_show_path @board
   end
   
   private

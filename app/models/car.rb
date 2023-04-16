@@ -53,6 +53,10 @@ class Car < ApplicationRecord
   def simple_etc
     [self.model_mfr, self.area, self.hiragana, self.class_num, self.remarks].compact_blank
   end
+
+  def search_conditions
+    [self.division_i18n, self.number].compact_blank.join(" ")
+  end
   
   def self.import(csv)
     if CSV.read(csv.path, headers: true, encoding: "cp932:UTF-8")[0].count == 6
