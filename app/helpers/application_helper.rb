@@ -15,4 +15,9 @@ module ApplicationHelper
   def boards_per_page
     8
   end
+
+  def app_ver
+    File.read("#{Rails.root}/VERSION").chomp
+  end
+
 end
