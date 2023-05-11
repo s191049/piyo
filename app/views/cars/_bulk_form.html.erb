@@ -22,7 +22,7 @@
       <% end %>
           <tr class="row">
             <td class="col-1 <%= "car-#{car_form.index}" %>"><%= car_form.select :oil_type, Car.oil_types_i18n.invert.map{|m| [m.first.slice(0),m.second]}, class:"form-select mw-100" %></td>
-            <td class="col-2 <%= "car-#{car_form.index}" %>"><%= car_form.text_field :number, inputmode:"numeric", pattern: "000[1-9]|00[1-9][0-9]|0[1-9][0-9]{2}|[1-9][0-9]{0,3}", class: "form-control", autocomplete: "off" %></td>
+            <td class="col-2 <%= "car-#{car_form.index}" %>"><%= car_form.text_field :number, inputmode:"numeric", pattern: "000[1-9]|00[1-9][0-9]|0[1-9][0-9]{2}|[1-9][0-9]{0,3}", class: "form-control hankaku-num-form", autocomplete: "off" %></td>
             <td class="col-2 <%= "car-#{car_form.index}" %>"><%= car_form.text_field :color, inputmode:"text", class: "form-control", autocomplete: "off" %></td>
             <td class="col-3 <%= "car-#{car_form.index}" %>"><%= car_form.text_field :model_mfr, inputmode:"text", class: "form-control", autocomplete: "off" %></td>
             <td class="col <%= "car-#{car_form.index}" %>"><%= car_form.text_field :remarks, inputmode:"text", class: "form-control", autocomplete: "off" %></td>

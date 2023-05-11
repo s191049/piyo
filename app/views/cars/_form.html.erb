@@ -13,7 +13,8 @@
 
   <p class="form-group">
     <%= f.label :ナンバー, class: "form-label" %>
-    <%= f.number_field :number, in: 1..9999, class: "form-control", autocomplete: "off" %>
+    <%# f.number_field :number, in: 1..9999, class: "form-control hankaku-num-form", autocomplete: "off" %>
+    <%= f.text_field :number, inputmode:"numeric", pattern: "000[1-9]|00[1-9][0-9]|0[1-9][0-9]{2}|[1-9][0-9]{0,3}", class: "form-control hankaku-num-form", autocomplete: "off" %>
   </p>
 
   <p class="form-group">
