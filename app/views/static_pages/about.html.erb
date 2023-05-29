@@ -1,6 +1,10 @@
 <% provide(:title, "About") %>
 <p>This tool is made by 水口</p>
 <p><%= app_ver %></p>
-<p>他端末からのアクセス<br>
-   <%= link_to nil, "http://#{%x(hostname -I).chomp.gsub(" ","")}:3000" %>または<%= link_to nil, "http://#{%x(hostname).chomp.gsub(" ","")}:3000" %>
-</p>
+<% if %x(hostname -I).chomp.gsub(" ","").blank? %>
+   <p>インターネットに接続されていません</p>
+<% else %>
+   <p>他端末からのアクセス<br>
+      <%= link_to nil, "http://#{%x(hostname -I).chomp.gsub(" ","")}:3000" %>または<%= link_to nil, "http://#{%x(hostname).chomp.gsub(" ","")}:3000" %>
+   </p>
+<% end %>

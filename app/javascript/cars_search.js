@@ -6,13 +6,19 @@ $(".hankaku-num-form").on('change', function(event){
 	$(this).val(str);
 });
 
-function clearForm(){
-  alert("hogehoge");
-  $("#search_form").find("textarea, :text, select").val("").end().find(":checked").prop("checked", false);
-}
-
 $(function(){
 	$('.clear-form-btn').on('click', function(){
 	  $("#search_form").find("textarea, :text, select").val("").end().find(":checked").prop("checked", false);
+	});
+});
+
+$(function(){
+	$('.enter-number').keypress(function(e){
+		const key = e.keyCode;
+		if(key === 13){
+			$('.hankaku-num-form').focus();
+			return false;
+		}
+		
 	});
 });

@@ -7,7 +7,7 @@
     <%= f.label :分類, class: "form-label" %>
     <div class="form-check btn-group d-inline-flex justify-content-between row row-cols-5 flex-row" data-toggle="buttons" role="group" aria-label="Basic radio toggle button group">
       <% Car.divisions.each do |key, value| %>
-        <%= f.radio_button(:division, key, class: "btn-check", autofocus: true) %>
+        <%= f.radio_button(:division, key, class: "btn-check enter-number", autofocus: true) %>
         <% if value < 2 %>
           <%= f.label(:division, I18n.t("table.value.car." + key), value: key, class:"btn btn-outline-success col text-break d-flex align-items-center justify-content-center") %>
         <% else %>
@@ -23,7 +23,6 @@
   </p>
   <div class="d-grid gap-2">
     <%= f.submit :検索, class: "btn btn-primary" %>
-    <%# button_tag :クリア, type: "button", class: "btn btn-danger", onclick:"clearForm()" %>
     <%= button_tag :クリア, type: "button", class: "btn btn-danger clear-form-btn" %>
   </div>
 <% end %>
