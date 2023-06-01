@@ -35,7 +35,9 @@
     <%= "検索結果" %>
     <% end %>
   </p>
-  <% if @car_list.count > 0 %>
+  
+  <%# if @car_list.count > 0 Countモデルが悪さしてる？ %>
+  <% if @car_list.size > 0 %>
     <div id="search-result">
       <%= render 'cars/simple_table', find_list: @car_list %>
     </div>
