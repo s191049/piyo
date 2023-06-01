@@ -83,15 +83,11 @@ class CarsController < ApplicationController
   end
 
   def search
-    #debugger
-    #if (defined? params.require(:car)) == nil
-    #if params.require(:car) == nil
     if params[:car].nil?
       @car = Car.new
     else
       @car = Car.new(car_params)
-      @car_list = @car.find_match
-      #redirect_to cars_search_path(@car_list, anchor: 'search-result') and return
+      @car_list = @car.find_match.includes(:counter).order("counters.visit_count DESC")
       render 'search' and return
     end
   end
@@ -102,8 +98,17 @@ class CarsController < ApplicationController
         flash.now[:danger] = "ファイルが不正です"
         render 'import', status: :unprocessable_entity and return
       else
+        cnt = Car.count
         Car.import(params[:csv])
+        if cnt == Car.count
+          flash.now[:danger] = "ファイルが不正です"
+          render 'import', status: :unprocessable_entity and return
+        end
         redirect_to cars_index_path
+      end
+    else
+      if Car.count > 0
+        flash.now[:info] = "車番データがすでに入っています"
       end
     end
   end
@@ -128,6 +133,22 @@ class CarsController < ApplicationController
         send_data(xlsx_data, filename: xlsx_name)
       end
     end
+  end
+
+  def countup
+    if params['car_id'].present?
+      @car = Car.find(params['car_id'])
+      if @car.counter == nil
+        Counter.create(car:@car)
+      end
+      @car.counter.countup
+    end
+    render turbo_stream: turbo_stream.replace(
+    	"count_buttons_#{@car.id}",
+    	partial: 'cars/simple_table_counter',
+    	locals: { car: @car, clicked: true },
+    )
+
   end
 
   private

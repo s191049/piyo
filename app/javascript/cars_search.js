@@ -22,3 +22,14 @@ $(function(){
 		
 	});
 });
+
+//今後count-button全部disableにしたい
+/*
+$(function(){
+	$('.count-button').on('click', function(){
+		$('.count-button').each(function(){
+			this.prop('disabled', true);
+		});
+	});
+});
+*/

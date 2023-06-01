@@ -6,6 +6,7 @@
           <th scope="col"><%= I18n.t("activerecord.attributes.car." + key) %></th>
         <% end %>
         <th scope="col">その他</th>
+        <th scope="col">来店回数</th>
         <th scope="col"></th>
     </tr>
     </thread>
@@ -41,7 +42,11 @@
             <% else %>
               <td scope="row" class="gasoline"><%= list.simple_etc.join("/") %></td>
             <% end %>
+
+            <td scope="row"><%= render partial: 'cars/simple_table_counter', locals: { car: list, clicked: false } %></td>
+
           <% end %>
+
           <td scope="row"><%= link_to '詳細', cars_show_path(list.id), class: "btn btn-primary" %></td>
         </tr>
       <% end %>

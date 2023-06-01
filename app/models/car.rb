@@ -1,4 +1,6 @@
 class Car < ApplicationRecord
+  has_one :counter, dependent: :destroy
+  
   # 油種は必須 enum 数値範囲は後ほど指定予定
   enum oil_type: { diesel: 0, gasoline: 1 }
   validates :oil_type, presence: true
@@ -59,11 +61,27 @@ class Car < ApplicationRecord
   end
   
   def self.import(csv)
+    cnt = Car.count
     if CSV.read(csv.path, headers: true, encoding: "cp932:UTF-8")[0].count == 6
       CSV.foreach(csv.path, headers: true, encoding: "cp932:UTF-8") do |row|
         unless Car.where(row.to_h).count > 0
           Car.create(row.to_h)
         end
+      end
+    elsif CSV.read(csv.path, headers: true, encoding: "cp932:UTF-8")[0].count == 12
+      CSV.foreach(csv.path, headers: true, encoding: "cp932:UTF-8") do |row|
+        unless Car.where(row.to_h).count > 0
+          Car.create(row.to_h.reject{ |key| "id" == key })
+        end
+      end
+    end
+  end
+
+  def self.delete_all
+    cars = Car.all
+    ActiveRecord::Base.transaction do
+      cars.each do |car|
+        car.destroy!
       end
     end
   end

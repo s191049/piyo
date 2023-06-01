@@ -1,0 +1,8 @@
+<%= turbo_frame_tag "count_buttons_#{car.id}" do %>
+  <!-- ここに来店回数表示 -->
+  <% if car.counter == nil %>
+    <%= button_to '1', countup_path(:car_id => car.id), method: :post, remote: true, params: {car_id: car.id}, class: "btn btn-lg btn-outline-dark rounded-0 w-auto count-button", disabled: clicked %>
+  <% else %>
+    <%= button_to car.counter.visit_count, countup_path(:car_id => car.id), method: :post, remote: true, params: {car_id: car.id}, class: "btn btn-lg btn-outline-dark rounded-0 w-auto count-button", disabled: clicked %>
+  <% end %>
+<% end %>
