@@ -137,16 +137,24 @@ class CarsController < ApplicationController
 
   def countup
     if params['car_id'].present?
-      @car = Car.find(params['car_id'])
-      if @car.counter == nil
-        Counter.create(car:@car)
+      countuped = false
+      if params['countuped'] == "false"
+        @car = Car.find(params['car_id'])
+        if @car.counter == nil
+          Counter.create(car:@car)
+        end
+        @car.counter.countup
+      else
+        @car = Car.find(params['car_id'])
+        @car.counter.countdown
+        countuped = true
       end
-      @car.counter.countup
     end
+
     render turbo_stream: turbo_stream.replace(
     	"count_buttons_#{@car.id}",
     	partial: 'cars/simple_table_counter',
-    	locals: { car: @car, clicked: true },
+    	locals: { car: @car, countuped: !(countuped) },
     )
 
   end

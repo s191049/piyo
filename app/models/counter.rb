@@ -5,4 +5,8 @@ class Counter < ApplicationRecord
   def countup
     self.increment!(:visit_count)
   end
+
+  def countdown
+    self.decrement!(:visit_count)
+  end
 end
